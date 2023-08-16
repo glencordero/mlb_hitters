@@ -1,2 +1,6 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Welcome to the MLB Hitters Club</h1>
+<h2>
+    <a href={`/players/`} class="button-link">View the Hitters!</a>
+</h2>
+
+<img src="https://thesportswave.net/wp-content/uploads/2022/02/img_8957.jpg" alt="legends" width="500">
