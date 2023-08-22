@@ -1,9 +1,22 @@
-// i will return a player based on params.player_id
+import {db} from "$lib/server/db"
+import { error } from "@sveltejs/kit"
+
+
+
 export const load = async ({ fetch, params  }) => {
-    const response = await fetch(`http://localhost:4000/hitters/${params.player_id}`)
-    const hitter = await response.json()
-    console.log(hitter)
-    return {
-      hitter
-    }
+  console.log(params.player_id)
+  const player = db.Player.findByPK(params.player_id)
+  if (!player){
+    throw error(404, {
+      message: "Player not found"
+    })
+  }  
+  return {
+    player
   }
+}
+
+// function getRecordById(id) {
+//   const statement = db.prepare('SELECT * FROM your_table WHERE id = ?');
+//   return statement.get(id);
+// }

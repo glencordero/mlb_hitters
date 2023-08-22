@@ -1,25 +1,16 @@
+import { models } from "$lib/server/db/index.js"
+
 export const actions = {
-    default: async({request})=>{
+    default: async({ request })=>{
         const data = await request.formData()
-        const player = data.get('player')
+        const name = data.get('name')
         const hits = data.get('hits')
         const hof = data.get('hof')
-        const newPlayer = {
-            hits,
-            player,
-            hof: hof ? true : false
-        }
         
-        fetch('http://localhost:4000/hitters', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newPlayer)
-        })
-
+        models.Player.add(name, hits, hof ? 1 : 0)
+        
         return {
-            message: "Player successfully added."
+            message: `${ name } added.`
         }
 
     }

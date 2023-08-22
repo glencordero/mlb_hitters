@@ -1,7 +1,23 @@
+import { models } from "$lib/server/db"
+
 export const load = async ({ fetch, params  }) => {
-  const response = await fetch("http://localhost:4000/hitters")
-  const hitters = response.json()
+  const players = models.Player.findAll()
+
   return {
-    hitters
+    players
   }
 }
+
+export const actions = {
+  default: async({request})=>{
+    const data = await request.formData()
+    const id = data.get('id')
+    
+    models.Player.remove(id)
+
+    return {
+      message: `Player ${id} removed`
+    }
+  }
+}
+

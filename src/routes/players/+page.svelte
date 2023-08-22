@@ -1,25 +1,49 @@
 <script>
+    // import {onMount} from "svelte"
+    // import {invalidateAll} from "$app/navigation"
     export let data
-    const {hitters} = data
-    // placeholder function warning. Add functionality later.
-    function warning(){
-      alert('Are you sure? This operation cannot be undone.')
-    }
+    export let form
+    const {players} = data
+    // onMount(() => {
+    //   invalidateAll()
+    // })
 </script>
 
-<h2>MLB Hitters Club</h2>
+<h1 class="text-2xl font-bold pb-6">MLB Hitters Club</h1>
 
-<ul>
-    {#each hitters as hitter}
+{form?.message || ""}
+
+{ #each players as player }
+  <div class="grid grid-cols-[200px_150px_40px] width-12 gap-4 my-10">
+    <p>
+      { player.name }
+    </p>
+    <a href={`/players/${player.id}/view`}>
+      <span class="bg-green-300 text-center rounded-full py-2 px-5 border-2 border-green-700">View Player</span>
+    </a>
+    <form class="mt-[-8px]" method="post">
+      <input type="hidden" value="{player.id}" name="id"/>
+      <button class="bg-red-300 text-center rounded-full py-[0.4rem] px-5 border-2 border-red-700">
+        Remove
+      </button>
+    </form>
+  </div>
+{ /each }
+
+<!-- <ul>
+    {#each players as player}
       <li>
-        <p>{hitter.player}</p>
-        <a href={`/players/${hitter.id}/view`} class="button-link">View Player</a>
-        <button class="button-link" on:click={warning}>Remove</button>
+        <p>{player.name}</p>
+        <a href={`/players/${player.id}/view`} class="button-link">View Player</a>
+        <form method="post">
+          <input type="hidden" value="{player.id}" name="id"/>
+          <button class="button-link">Remove</button>
+        </form> 
       </li>
     {/each}
-</ul>
+</ul> -->
 
-<style>
+<!-- <style>
   /* Shared styles for button and button-link */
   .button-link {
     display: inline-block;
@@ -35,4 +59,4 @@
     font-size: 14px;
   }
 
-</style>
+</style> -->

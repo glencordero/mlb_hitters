@@ -3,13 +3,14 @@
     import Name from "$lib/components/Name.svelte"
     import About from "$lib/components/About.svelte";
     export let data
-    const {hitter} = data
+    const {player} = data
+    console.log(player)
 </script>
 
 <h2>Welcome to the MLB Hitters Club!</h2>
 
 <h3>Introducing...</h3>
 
-<Name name={hitter.player}></Name>
+<Name name={player.name} />
 
-<About hof={hitter.hof} hits={hitter.hits}></About>
+<About hof={player.hof} hits={player.hits} />
